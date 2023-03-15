@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inverse Kinematics Arm Visualizer - Results</title>
+</head>
+<body>
+    <h1>Inverse Kinematics Arm Visualizer - Results</h1>
+    <h2>Table</h2>
+    <table border="1">
+        <tr>
+            <th>Endpoint</th>
+            <th>Joint Angles</th>
+        </tr>
+        {% for row in table %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Plots</h2>
+    {% for filename in filenames %}
+    <img src="{{ url_for('send_image', filename=filename) }}" alt="Inverse Kinematics Plot">
+    {% endfor %}
+    <br>
+    <a href="{{ url_for('index') }}">Back to Input</a>
+</body>
+</html>
