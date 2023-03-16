@@ -1,31 +1,82 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinematics Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Results</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Theta1</th>
+                    <th>Theta2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for angles in joint_angles %}
+                <tr>
+                    <td>{{ angles[0] | round(2)}}</td>
+                    <td>{{ angles[1] | round(2)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Plot Images</h2>
+        <div class="grid-container">
+            {% for filename in filenames %}
+            <div class="grid-item">
+                <img src="{{ url_for('send_image', filename=filename) }}" alt="Plot Image">
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inverse Kinematics Arm Visualizer - Results</title>
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Inverse Kinematics Arm Visualizer - Results</h1>
-    <h2>Table</h2>
-    <table border="1">
-        <tr>
-            <th>Endpoint</th>
-            <th>Joint Angles</th>
-        </tr>
-        {% for row in table %}
-        <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <h2>Plots</h2>
-    {% for filename in filenames %}
-    <img src="{{ url_for('send_image', filename=filename) }}" alt="Inverse Kinematics Plot">
-    {% endfor %}
-    <br>
-    <a href="{{ url_for('index') }}">Back to Input</a>
+    <div class="container">
+        <h1>Results</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Theta1</th>
+                    <th>Theta2</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for angles in joint_angles %}
+                <tr>
+                    <td>{{ angles[0] | round(2) }}</td>
+                    <td>{{ angles[1] | round(2)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Plot Images</h2>
+        <div class="grid-container">
+            {% for filename in filenames %}
+            <div class="grid-item">
+                <img class="image" src="{{ url_for('send_image', filename=filename) }}" alt="Plot Image">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>

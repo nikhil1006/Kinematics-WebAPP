@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inverse Kinematics Arm Visualizer</title>
+    <title>Inverse Kinematics Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Inverse Kinematics Arm Visualizer</h1>
-    <form action="/calculate" method="POST">
-        <label for="endpoints">Enter Endpoints (separated by spaces):</label>
-        <br>
-        <textarea name="endpoints" id="endpoints" rows="5" cols="40"></textarea>
-        <br>
-        <input type="submit" value="Calculate">
-    </form>
+    <div class="container">
+        <h1>Kinematics Calculator</h1>
+        <form action="/calculate" method="post">
+            <label for="endpoints">Enter Endpoint Coordinates (comma separated values as a tuple)</label>
+            <input type="text" name="endpoints" id="endpoints" required>
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
 </body>
 </html>
