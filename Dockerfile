@@ -12,10 +12,12 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
+#EXPOSE 5000
 
 # Define environment variable
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Run app.py when the container launches
-CMD ["flask", "run"]
+ CMD ["flask", "run"]
+#CMD ["python", "app.py"]
