@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-      "Name": "prasanna1006/inversekinematicsweb:latest",
+      "Name": "prasanna1006/inversekinematics:latest",
       "Update": "true"
     },
     "Ports": [

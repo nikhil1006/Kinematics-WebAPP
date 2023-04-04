@@ -37,6 +37,11 @@ def calculate():
 def send_image(filename):
     return send_from_directory("static/images", filename)
 
+@app.route('/visualization')
+def visualization():
+    return render_template('visualization.html')
+
+
 def inverse_kinematics(endpoints):
     L1 = 1.0
     L2 = 1.0

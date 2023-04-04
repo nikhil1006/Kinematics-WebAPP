@@ -1,6 +1,6 @@
 # Inverse Kinematics Web Application
 
-This web application demonstrates inverse kinematics functionality. It uses a Flask server on the backend and React on the frontend. The application is containerized using Docker.
+This web application demonstrates inverse kinematics functionality. It uses a Flask server on the backend, HTML & CSS on the frontend. The application is containerized using Docker.
 
 ## Prerequisites
 
