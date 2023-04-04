@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, send_from_directory
+#from flask import Flask, url_for
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -6,6 +7,7 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 import os
 import re
+
 
 app = Flask(__name__)
 
@@ -15,6 +17,7 @@ def index():
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
+    print("calculating...")
     input_endpoints = request.form['endpoints']
     print("Input Endpoints:", input_endpoints)
 
@@ -30,15 +33,25 @@ def calculate():
         x, y = input_endpoints[i]
         theta1, theta2 = joint_angles[i]
         table.append([str((round(x, 2), round(y, 2))), str((round(theta1, 2), round(theta2, 2)))])
-
+    #print(url_for('calculate'))
     return render_template('results.html', table=table, filenames=plot_filenames, joint_angles=joint_angles, enumerate=enumerate)
 
 @app.route('/images/<filename>')
 def send_image(filename):
     return send_from_directory("static/images", filename)
 
+# @app.route('/visualization')
+# def visualization():
+#     return send_from_directory('static', 'visualization.html')
+
+# @app.route('/view-visualization')
+# def visualization():
+#     print("Visualizing...")
+#     return send_from_directory('static', 'visualization.html')
+
 @app.route('/visualization')
 def visualization():
+    print("Visualizing...")
     return render_template('visualization.html')
 
 

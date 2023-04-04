@@ -1,3 +1,5 @@
+console.log("inverse_kinematics_visualization.js loaded!");
+
 let L1 = 100;
 let L2 = 100;
 
