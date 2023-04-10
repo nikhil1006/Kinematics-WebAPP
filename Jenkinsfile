@@ -3,32 +3,35 @@ pipeline {
     stages {
         stage('Prepare') {
             steps {
-                script {
-                    checkout scm
-                    def myImage = docker.build 'python:3.9'
-                    myImage.inside('-u root:root') {
-                        sh 'pip install -r requirements.txt'
-                    }
-                }
+                // script {
+                //     checkout scm
+                //     def myImage = docker.build 'python:3.9'
+                //     myImage.inside('-u root:root') {
+                //         sh 'pip install -r requirements.txt'
+                //     }
+                // }
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('Test') {
             steps {
-                script {
-                    docker.image('python:3.9').inside('-u root:root') {
-                        sh 'pytest'
-                    }
-                }
+                // script {
+                //     docker.image('python:3.9').inside('-u root:root') {
+                //         sh 'pytest'
+                //     }
+                // }
+                sh 'pytest'
             }
         }
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
-                        def app = docker.build("prasanna1006/inversekinematics:latest")
-                        app.push("latest")
-                    }
-                }
+                // script {
+                //     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                //         def app = docker.build("prasanna1006/inversekinematics:latest")
+                //         app.push("latest")
+                //     }
+                // }
+                sh 'docker build -t inversekinematics .'
             }
         }
         stage('Deploy to Minikube') {
