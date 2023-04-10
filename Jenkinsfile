@@ -1,15 +1,15 @@
 pipeline {
-    // agent { label 'master-node' }
-    agent {
-        docker {
-            image 'python:3.9'
-            args '-u root:root'
-            registryUrl 'https://index.docker.io/v1/'
-            registryCredentialsId 'docker-hub-credentials'
-            label 'master-node'
-            customWorkspace '/jenkins/workspace'
-            scriptPath '/usr/local/bin/docker' // Add this line
-        }
+    agent { label 'master-node' }
+    // agent {
+    //     docker {
+    //         image 'python:3.9'
+    //         args '-u root:root'
+    //         registryUrl 'https://index.docker.io/v1/'
+    //         registryCredentialsId 'docker-hub-credentials'
+    //         label 'master-node'
+    //         customWorkspace '/jenkins/workspace'
+    //         scriptPath '/usr/local/bin/docker' // Add this line
+    //     }
     }
     stages {
         stage('Prepare') {
