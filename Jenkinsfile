@@ -2,7 +2,7 @@ pipeline {
     agent { label 'master-node' }
     environment {
         DOCKER_IMAGE = 'python:3.9'
-        PATH = "/usr/local/bin/docker"
+        //PATH = "/usr/local/bin/docker"
     }
     stages {
         stage('Prepare') {
