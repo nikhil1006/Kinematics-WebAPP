@@ -1,12 +1,15 @@
 pipeline {
     agent { label 'master-node' }
+    environment {
+        DOCKER_IMAGE = 'python:3.9'
+    }
     stages {
         stage('Prepare') {
             steps {
                 script {
                     checkout scm
-                    def myImage = docker.build 'python:3.9'
-                    myImage.inside('-u root:root') {
+                    def myImage = docker.build("${DOCKER_IMAGE}")
+                    myImage.inside('-u root:root --entrypoint ""') {
                         sh 'pip install -r requirements.txt'
                     }
                 }
@@ -15,7 +18,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image('python:3.9').inside('-u root:root') {
+                    docker.image("${DOCKER_IMAGE}").inside('-u root:root --entrypoint ""') {
                         sh 'pytest'
                     }
                 }
