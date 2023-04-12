@@ -15,7 +15,8 @@ spec:
       containers:
       - name: flask-app
         #image: prasanna1006/inversekinematics:latest 
-        image: 000065695109.dkr.ecr.us-east-1.amazonaws.com/inversekinematics
+        #image: 000065695109.dkr.ecr.us-east-1.amazonaws.com/inversekinematics
+        image: 000065695109.dkr.ecr.us-east-1.amazonaws.com/inversekinematics:v1
         ports:
         - containerPort: 5000
 ---
