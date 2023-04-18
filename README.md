@@ -313,99 +313,36 @@ docker build -t your-new-image-name .
 docker run -d -p 80:5000 --name my_new_app_instance your-new-image-name
 ```
 
-## **7. Jenkins Integration**
+## **7. CI/CD Integration with GitHub Actions**
 
-### **7.1. Setting up Jenkins**
+### **7.1.  Setting up GitHub Actions**
 
-1. Install Jenkins on your local machine or server.
-2. Configure the necessary plugins (GitHub, Docker, etc.).
-3. Set up necessary credentials for Docker Hub and GitHub.
+1. Ensure that your code is stored in a GitHub repository.
+2. Create a new file named **`.github/workflows/main.yml`** in your repository. This file will store the configuration for your GitHub Actions CI/CD pipeline.
 
-### **7.2. Creating a Jenkins Pipeline**
+### **7.2.  Creating a GitHub Actions Workflow**
 
-1. Create a new Jenkins Pipeline job.
-2. Set the build trigger to Poll SCM or use webhooks.
-3. Add the following pipeline script:
+1. In the **`main.yml`** file, define the workflow name, the events that trigger the workflow, and the jobs that run during the workflow.
+2. Set up the necessary environment and dependencies for each job. This typically includes checking out the code from the repository, setting up Python, installing dependencies, logging into Amazon ECR, and configuring the AWS CLI.
+3. Define the build, test, and deployment steps in the workflow. This might include building and pushing a Docker image to Amazon ECR, updating the Kubernetes configuration, and deploying the application to Amazon EKS.
+4. Store sensitive information, such as AWS credentials, as GitHub Secrets. Access these secrets within the workflow using the **`secrets`** context.
 
-```groovy
-pipeline {
-    agent any
+### **7.3.  Monitoring and Troubleshooting the GitHub Actions Workflow**
 
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the source code from the Git repository
-                checkout scm
-            }
-        }
+1. When the workflow is triggered, you can view the progress and output in the "Actions" tab of your GitHub repository.
+2. If the workflow fails, examine the logs for any errors or issues. Common problems might include:
+    - Invalid or expired credentials: Ensure that the credentials you provided are correct and up-to-date.
+    - Dependency issues: Check for any issues with the dependencies or packages installed during the workflow.
+    - Configuration errors: Verify that your workflow configuration and any associated files are correct and properly configured.
+3. If you cannot resolve the issue based on the error message, try searching for the error online or consult the GitHub Actions documentation for further guidance.
 
-        stage('Build') {
-            steps {
-                // Build the Docker image
-                script {
-                    dockerImage = docker.build("your-dockerhub-username/your-image-name")
-                }
-            }
-        }
+### **7.4.  Maintaining and Updating the CI/CD Pipeline**
 
-        stage('Test') {
-            steps {
-                // Run the tests (if any)
-            }
-        }
+1. Regularly review and update your CI/CD pipeline to ensure it remains aligned with your project requirements, dependencies, and infrastructure.
+2. Keep your GitHub Actions configuration file version-controlled within your repository, so you can track changes and maintain a history of your CI/CD pipeline.
+3. Monitor the success and performance of your CI/CD pipeline to identify any areas for improvement or optimization.
 
-        stage('Deploy') {
-            steps {
-                // Push the Docker image to Docker Hub
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        dockerImage.push("latest")
-                    }
-                }
-            }
-        }
-    }
-}
 
-```
-
-1. Save and execute the pipeline.
-
-### **7.3. Troubleshooting Jenkins (continued)**
-
-If the pipeline fails, check the console output for errors. Common issues include:
-
-- Invalid or expired credentials: Make sure the credentials you provided are correct and up-to-date.
-- Missing plugins: Ensure you have installed and configured all necessary plugins for Jenkins.
-- Networking issues: Check your internet connection and any firewall settings that might be affecting Jenkins.
-- Misconfiguration: Verify that your pipeline script is correct and properly configured.
-
-If you cannot resolve the issue based on the error message, try searching for the error online or consult the Jenkins documentation for further guidance.
-
-### 7.4. **Jenkins Integration (Failed)**
-
-During the integration process with Jenkins, we faced the following error:
-
-```lua
-
-Caused: java.io.IOException: Cannot run program "docker": error=2, No such file or directory
-```
-
-The error indicates that Jenkins cannot find the "docker" command in its environment. This is likely due to either the Docker installation being missing or the Docker executable not being included in the system PATH.
-
-Unfortunately, we were unable to resolve the issue and successfully integrate Jenkins with our project. Therefore, we need to look for alternative CI/CD tools.
-
-### 7.5. **To-Do: Research and Integrate Alternative CI/CD Tool**
-
-As Jenkins did not work for our specific use case, we need to research and explore other CI/CD tools that can be integrated with our project. Some popular alternatives to Jenkins are:
-
-- [ ]  GitLab CI/CD
-- [ ]  Travis CI
-- [ ]  CircleCI
-- [ ]  GitHub Actions
-- [ ]  Azure Pipelines
-
-It is essential to choose a CI/CD tool that fits our project requirements, can be easily integrated, and has good documentation and support.
 
 ## **8. Troubleshooting**
 
